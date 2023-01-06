@@ -8,16 +8,23 @@ import cv2
 import os
 import urllib.request
 
+
 app = Flask(__name__)
 
-@app.route("/model/",methods=['GET', 'POST'])
 
+
+@app.route('/', methods=['GET'])
+def main():
+    return 'Backend-server Connect'
+
+@app.route("/model/",methods=['GET', 'POST'])
 def test():
     if(request.method == 'POST'):
-        url = {'id':'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/surprising-flower-meanings-balloon-flowers-1650767465.jpg'}
-        params = request.get_json(url)
-        dic = url_to_image(params[id])
+        params = request.args.get('id')
+        dic = url_to_image(params)
         return dic
+    elif(request.method =='GET'):
+        return 'Backend-server Connect'
 
 def url_to_image(url):
     resp = urllib.request.urlopen(url)
