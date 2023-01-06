@@ -20,7 +20,7 @@ def main():
 @app.route("/model/",methods=['GET', 'POST'])
 def test():
     if(request.method == 'POST'):
-        params = request.args.get('id')
+        params = request.get_json()['id']
         dic = url_to_image(params)
         return dic
     elif(request.method =='GET'):
@@ -52,4 +52,4 @@ def url_to_image(url):
     return image_name_list
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0' ,port = 5001, debug=True)
