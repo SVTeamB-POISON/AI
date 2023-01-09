@@ -6,7 +6,6 @@ import numpy as np
 import pickle
 import cv2
 import os
-import urllib.request
 
 
 app = Flask(__name__)
@@ -20,17 +19,17 @@ def main():
 @app.route("/model/",methods=['GET', 'POST'])
 def test():
     if(request.method == 'POST'):
-        params = request.get_json()['id']
+        params = request.files['id'].read()
         dic = url_to_image(params)
         return dic
     elif(request.method =='GET'):
         return 'Backend-server Connect'
 
-def url_to_image(url):
-    resp = urllib.request.urlopen(url)
-    image = np.asarray(bytearray(resp.read()),dtype='uint8')
-    image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-    args = {'model': 'p2flower.model', 'labelbin': 'lb2.pickle'}
+def url_to_image(filestr):
+    file_bytes = np.fromstring(filestr, np.uint8)
+    image = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
+
+    args = {'model': 'p2flower.model', 'labelbin': 'lb2.pickle','image': ''}
     output = image.copy()
     
     image = cv2.resize(image, (224,224))
