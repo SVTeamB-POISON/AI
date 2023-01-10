@@ -32,7 +32,7 @@ def test():
 def url_to_image(image):
     image = np.asarray(image)
     image = cv2.cvtColor(image,cv2.COLOR_RGB2BGR)
-    args = {'model': 'p2flower.model', 'labelbin': 'lb2.pickle'}
+    args = {'model': 'p3flower.model', 'labelbin': 'lb3.pickle'}
     output = image.copy()
     
     image = cv2.resize(image, (224,224))
