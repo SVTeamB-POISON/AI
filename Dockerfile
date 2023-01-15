@@ -12,7 +12,6 @@ RUN apt-get -y install libgl1-mesa-glx
 
 RUN pip install -r /requirements.txt
 
-
 COPY . ./
 
 CMD ["python", "app.py"]

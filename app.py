@@ -10,7 +10,7 @@ import urllib.request
 from io import BytesIO
 from PIL import Image
 import base64
-from numpy import asarray
+
 app = Flask(__name__)
 
 
@@ -32,11 +32,12 @@ def test():
 def url_to_image(image):
     image = np.asarray(image)
     image = cv2.cvtColor(image,cv2.COLOR_RGB2BGR)
-    args = {'model': 'p4flower.model', 'labelbin': 'lb4.pickle'}
-    output = image.copy()
+
+    args = {'model': 'p5flower.model', 'labelbin': 'lb5.pickle'}
     
     image = cv2.resize(image, (224,224))
     image = image.astype("float") / 255.0
+    
     image = img_to_array(image)
     image = np.expand_dims(image, axis = 0)
     
