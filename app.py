@@ -33,7 +33,7 @@ def url_to_image(image):
     image = np.asarray(image)
     image = cv2.cvtColor(image,cv2.COLOR_RGB2BGR)
 
-    args = {'model': 'p5flower.model', 'labelbin': 'lb5.pickle'}
+    args = {'model': 'p6flower.model', 'labelbin': 'lb6.pickle'}
     
     image = cv2.resize(image, (224,224))
     image = image.astype("float") / 255.0
